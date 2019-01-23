@@ -1,10 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./assets/styles/foundation/foundation.scss";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
 @import "./assets/styles/ui-elements/colors";
 @import "./assets/styles/ui-elements/flex";
 @import "./assets/styles/responsive";
-// @import '~swiper/dist/css/swiper.min.css';
+@import "./assets/styles/ui-elements/select";
 
 html,
 body {
@@ -19,6 +20,11 @@ body {
     color: color(light);
     background: color(primary, base);
   }
+}
+
+/* Ng-select general styles */
+.ng-dropdown-panel-items.scroll-host {
+  width: 100% !important;
 }
 
 /* Foundation */

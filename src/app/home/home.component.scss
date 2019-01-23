@@ -1,0 +1,19 @@
+@import "../../assets/styles/common";
+
+$content-spacing: 3.5rem;
+
+.page {
+  background-color: #f4f4f4;
+
+  .page-content {
+    padding-top: $content-spacing;
+    padding-bottom: $content-spacing + 2rem;
+  }
+
+  .select-container {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    min-width: 15rem;
+  }
+}

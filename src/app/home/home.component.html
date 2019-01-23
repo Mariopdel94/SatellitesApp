@@ -1,3 +1,30 @@
-<p>
-  home works!
-</p>
+<div class="page">
+  <div class="center-x">
+
+    <div class="select-container">
+      <ng-select
+      class="satellite-app-select"
+      name="satelliteAppSelect"
+      notFoundText="There's no categories with that name"
+      placeholder="Filter by category"
+      [items]="categories"
+      [dropdownPosition]="'bottom'"
+      bindLabel="name"
+      bindValue="id"
+      [(ngModel)]="categoryId"
+      [searchable]="true">
+        <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+          <div class="center-y">
+            <span [ngOptionHighlight]="search">{{ item.name }}</span>
+          </div>
+        </ng-template>
+      </ng-select>
+    </div>
+
+    <div class="page-content full-width grid-container relative">
+      <app-spinner *ngIf="isBusy"></app-spinner>
+      <div *ngIf="!isBusy">
+      </div>
+    </div>
+  </div>
+</div>
