@@ -1,0 +1,15 @@
+@import "../../assets/styles/common";
+
+.scroll-wrapper {
+  background-color: #f4f4f4;
+  height: 100%;
+  overflow-y: auto;
+  position: absolute;
+  transition: 0.3s ease-in-out;
+  width: 100%;
+
+  .scroll-content {
+    min-height: calc(100% - 200px);
+    background-color: #f4f4f4;
+  }
+}

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UIModule } from './_core/modules/ui/ui.module';
 import { WrapperComponent } from './wrapper/wrapper.component';
+import { WrapperFooterComponent } from './wrapper/components/wrapper-footer/wrapper-footer.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
   ],
   declarations: [
     WrapperComponent,
+    WrapperFooterComponent,
   ],
   providers: [],
   bootstrap: [ WrapperComponent ],

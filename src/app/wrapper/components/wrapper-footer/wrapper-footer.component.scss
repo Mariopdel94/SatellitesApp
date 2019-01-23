@@ -1,0 +1,74 @@
+@import "../../../../assets/styles/common";
+@import "../../../../assets/styles/responsive";
+@import "../../../../assets/styles/ui-elements/text";
+
+#footer {
+  width: 100%;
+  min-height: 200px;
+  background: linear-gradient(color(secondary, base), #160f47);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  overflow: hidden;
+  position: relative;
+  color: color(light);
+  overflow: visible;
+}
+
+#content {
+  z-index: 2;
+  margin: auto;
+  text-align: center;
+
+  #footer-nav {
+    margin: 2rem auto;
+    margin-bottom: 2rem;
+
+    .navigation-button {
+      @include span-underline(color(accent, base), 1px);
+      color: #6255C5;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 1.15rem;
+      font-weight: 200;
+      margin: 0rem 0.65rem;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      transition: color 0.5s ease;
+
+      @include resolutions-above($resolution-medium) {
+        margin-bottom: 0.65rem;
+      }
+
+      &:hover {
+        color: color(accent, base);
+      }
+
+      a {
+        color: #6255C5;
+        text-decoration: none;
+        transition: color 0.5s ease;
+
+        &:hover {
+          color: color(accent, base);
+        }
+      }
+    }
+  }
+
+}
+
+#copyright {
+  color: color(primary, base);
+  font-size: 0.85rem;
+  font-weight: 800;
+  margin-top: 0.5rem;
+
+  @include resolutions-above($resolution-medium) {
+    .brand {
+      display: inline-flex;
+      margin-right: 0.30rem;
+    }
+  }
+}

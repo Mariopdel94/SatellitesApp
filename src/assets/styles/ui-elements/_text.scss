@@ -1,0 +1,33 @@
+@import "./colors";
+
+@mixin span-underline($color: color(accent, base), $lineWidth: 2px) {
+  cursor: pointer;
+  position: relative;
+  transition: all 0.4s ease;
+
+  &:hover {
+    color: $color;
+  }
+
+  &:after {
+    background-color: $color;
+    bottom: -0.25rem;
+    color: transparent;
+    content: '';
+    height: $lineWidth;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  &:hover:after {
+    width: 100%;
+  }
+}
+
+.span-underline {
+  @include span-underline();
+}
