@@ -1,0 +1,22 @@
+<div class="grid-x center-y relative">
+
+	<div class="close-icon-container" (click)="triggerClose()">
+		<i class="material-icons">close</i>
+	</div>
+
+	<!-- Icons -->
+	<div [ngSwitch]="type" class="shrink cell icon-container {{ panelClass }}" *ngIf="type">
+		<img src="assets/images/misc/toast-icons/default.png" *ngSwitchCase="'default'">
+		<img src="assets/images/misc/toast-icons/close.png" *ngSwitchCase="'warning'">
+	</div>
+
+	<!-- Message -->
+	<div class="auto cell message">{{ message || '' }}</div>
+
+	<!-- Action -->
+
+	<div class="shrink cell action-container" *ngIf="acceptLabel" (click)="triggerAction()">
+		{{ acceptLabel }}
+	</div>
+
+</div>

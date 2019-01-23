@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/styles/foundation/foundation.scss";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./assets/styles/ui-elements/colors";
+@import "./assets/styles/ui-elements/flex";
+@import "./assets/styles/responsive";
+// @import '~swiper/dist/css/swiper.min.css';
+
+html,
+body {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: normal;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  ::selection {
+    color: color(light);
+    background: color(primary, base);
+  }
+}
+
+/* Foundation */
+// Global styles
+@include foundation-global-styles;
+
+// Grids
+@include foundation-xy-grid-classes;
+
+// Helpers
+@include foundation-visibility-classes;

@@ -1,0 +1,75 @@
+@import "./ui-elements/colors";
+/** Helper classes **/
+
+.full-width {
+	width: 100% !important;
+}
+
+.full-height {
+	height: 100% !important;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.invisible {
+	opacity: 0 !important;
+}
+
+.margin-auto {
+	margin: auto !important;
+}
+
+.no-margin {
+	margin: 0 !important;
+}
+
+.margin-x {
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+.small-margin-y {
+	margin-bottom: 0.2rem;
+	margin-top: 0.2rem;
+}
+
+.medium-margin-y {
+	margin-bottom: 0.5rem !important;
+	margin-top: 0.5rem !important;
+}
+
+.margin-y {
+	margin-bottom: 1rem !important;
+	margin-top: 1rem !important;
+}
+
+.large-margin-y {
+	margin-bottom: 1.5rem !important;
+	margin-top: 1.5rem !important;
+}
+
+.padding-x {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.small-padding-y {
+	padding-bottom: 0.25rem;
+	padding-top: 0.25rem;
+}
+
+.padding-y {
+	padding-bottom: 1rem;
+	padding-top: 1rem;
+}
+
+.relative {
+	position: relative !important;
+}
+
+/** Helper spacings **/
+.overflow-hidden {
+	overflow: hidden;
+}

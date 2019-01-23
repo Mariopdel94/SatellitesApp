@@ -1,0 +1,48 @@
+@import "../../../../../../../assets/styles/ui-elements/colors";
+
+.close-icon-container {
+	position: absolute;
+	top: 0.33rem;
+	right: 0.33rem;
+	cursor: pointer;
+
+	i {
+		font-size: 0.9rem;
+	}
+}
+
+.icon-container {
+	align-items: center;
+	background-color: color(primary, base);
+	border-radius: 50%;
+	display: flex;
+	height: 2.5rem;
+	justify-content: center;
+	margin-right: 1rem;
+	padding: 0.66rem;
+	position: relative;
+	width: 2.5rem;
+
+	&.warning-toast {
+		background-color: color(warning, dark);
+	}
+}
+
+.message {
+	font-size: 1rem;
+	line-height: 1.1;
+}
+
+.action-container {
+	border-radius: 0.15rem;
+	cursor: pointer;
+	font-weight: bold;
+	margin-left: 1rem;
+	padding: 0.25rem;
+	transition: all 0.2s ease;
+	margin-right: 0.5rem;
+
+	&:hover {
+		background-color: transparentize(color(primary, base), 0.5);
+	}
+}
