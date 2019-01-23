@@ -10,8 +10,9 @@ import { WrapperComponent } from './wrapper/wrapper.component';
 import { WrapperFooterComponent } from './wrapper/components/wrapper-footer/wrapper-footer.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path: 'inicio',  loadChildren: './home/home.module#HomeModule' },
+  { path: '', redirectTo: 'index', pathMatch: 'full' },
+  { path: 'index',  loadChildren: './home/home.module#HomeModule' },
+  { path: 'about',  loadChildren: './about/about.module#AboutModule' },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

@@ -1,0 +1,27 @@
+@import "../../assets/styles/common";
+
+.page {
+  background-color: #f4f4f4;
+
+  .page-content {
+    padding-top: $content-spacing;
+    padding-bottom: $content-spacing + 2rem;
+    max-width: 40rem;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .title {
+    margin-top: 5rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  ul {
+    list-style-position: inside;
+  }
+}
