@@ -4,14 +4,35 @@
   background-color: #f4f4f4;
 
   .page-content {
-    padding-top: $content-spacing;
+    padding-top: 7rem;
     padding-bottom: $content-spacing + 2rem;
   }
 
   .select-container {
     position: absolute;
     top: 2rem;
-    right: 2rem;
+    right: 1rem;
     min-width: 15rem;
+  }
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.mat-header-row {
+  background-color: color(secondary, base);
+  .mat-header-cell {
+    color: color(light);
+  }
+}
+
+.mat-row {
+  &:nth-child(odd) {
+    background-color: color(primary, trans);
   }
 }

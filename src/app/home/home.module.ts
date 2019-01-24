@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
@@ -14,7 +15,9 @@ import { HomeComponent } from './home.component';
     HomeRoutingModule,
     UIModule,
     NgSelectModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    MatSortModule,
   ],
   declarations: [
     HomeComponent

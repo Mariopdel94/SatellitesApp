@@ -1,13 +1,22 @@
+import { Subject } from 'rxjs/Subject';
 import { SatelliteDataService } from './../_core/api/satellite-data/satellite-data.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { MatTableDataSource, MatSort } from '@angular/material';
+import { merge } from 'rxjs/observable/merge';
+import { of as observableOf } from 'rxjs/observable/of';
+import { catchError } from 'rxjs/operators/catchError';
+import { map } from 'rxjs/operators/map';
+import { startWith } from 'rxjs/operators/startWith';
+import { switchMap } from 'rxjs/operators/switchMap';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
-  public isBusy = false;
+export class HomeComponent implements OnInit, AfterViewInit {
+  public isBusy: boolean;
   public categories = [
     {
       id: 18,
@@ -215,26 +224,52 @@ export class HomeComponent implements OnInit {
     },
   ];
   public categoryId: number;
+  public displayedColumns: string[] = [
+    'idColumn',
+    'nameColumn',
+    'latitudeColumn',
+    'longitudeColumn',
+    'altitudeColumn',
+    'launchDateColumn'
+  ];
+  public dataSource = new MatTableDataSource();
+  @ViewChild(MatSort) sort: MatSort;
+  public categoryChange$: Subject<boolean> = new Subject();
 
   constructor(
     private _satelliteDataService: SatelliteDataService,
   ) { }
 
   ngOnInit() {
-    this._getSatellites();
+    this.dataSource.sort = this.sort;
   }
 
-  private _getSatellites() {
-    this.isBusy = true;
-    const params = { latitude: 0, longitude: 0, categoryId: 18 };
-    this._satelliteDataService.getSatellites(params)
-    .subscribe(response => {
-      this.isBusy = false;
-      console.log(response);
-    }, error => {
-      this.isBusy = false;
-      console.log(error);
-    });
+  ngAfterViewInit() {
+    this._sortListener();
+  }
+
+  private _sortListener() {
+    merge(this.sort.sortChange, this.categoryChange$)
+    .pipe(
+      startWith({}),
+      switchMap(() => {
+        this.isBusy = true;
+        const params = { latitude: 36.1057, longitude: 112.0948, categoryId: (this.categoryId || 0) };
+        return this._satelliteDataService.getSatellites(params);
+      }),
+      map(data => {
+        this.isBusy = false;
+        return data.records;
+      }),
+      catchError(() => {
+        this.isBusy = false;
+        return observableOf([]);
+      })
+    ).subscribe(data => this.dataSource.data = data);
+  }
+
+  public onSelectChange(category) {
+    this.categoryChange$.next(true);
   }
 
 }

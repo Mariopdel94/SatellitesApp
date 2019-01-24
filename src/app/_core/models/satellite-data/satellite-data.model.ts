@@ -2,12 +2,12 @@ import * as moment from 'moment';
 
 export class SatelliteData {
   public intDesignator = '';
-  public satname = '';
-  public satid = 0;
-  public satlat = 0;
-  public satlng = 0;
-  public satalt = 0;
-  public launchDate: Date;
+  public name = '';
+  public id = 0;
+  public latitude = 0;
+  public longitude = 0;
+  public altitude = 0;
+  public launchDate: string;
 
   constructor() {}
 
@@ -17,15 +17,15 @@ export class SatelliteData {
 
   public set(obj: any): this {
     this.intDesignator = String(obj.intDesignator || this.intDesignator || '');
-    this.satname = String(obj.satname || this.satname || '');
-    this.satid = Number(obj.satid || this.satid || 0);
-    this.satlat = Number(obj.satlat || this.satlat || 0);
-    this.satlng = Number(obj.satlng || this.satlng || 0);
-    this.satalt = Number(obj.satalt || this.satalt || 0);
+    this.name = String(obj.name || obj.satname || this.name || '');
+    this.id = Number(obj.id || obj.satid || this.id || 0);
+    this.latitude = Number(obj.latitude || obj.satlat || this.latitude || 0);
+    this.longitude = Number(obj.longitude || obj.satlng || this.longitude || 0);
+    this.altitude = Number(obj.altitude || obj.satalt || this.altitude || 0);
     this.launchDate = moment
       .utc(obj.launchDate || this.launchDate || new Date())
       .local()
-      .toDate();
+      .format('YYYY-MM-DD');
     return this;
   }
 

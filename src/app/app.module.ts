@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UIModule } from './_core/modules/ui/ui.module';
 
@@ -23,6 +24,7 @@ const routes: Routes = [
     FormsModule,
     UIModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   declarations: [
     WrapperComponent,

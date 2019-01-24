@@ -11,6 +11,7 @@
       [dropdownPosition]="'bottom'"
       bindLabel="name"
       bindValue="id"
+      (change)="onSelectChange($event)"
       [(ngModel)]="categoryId"
       [searchable]="true">
         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
@@ -22,8 +23,46 @@
     </div>
 
     <div class="page-content full-width grid-container relative">
-      <app-spinner *ngIf="isBusy"></app-spinner>
-      <div *ngIf="!isBusy">
+      <app-spinner [class.hidden]="!isBusy"></app-spinner>
+      <div [class.hidden]="isBusy">
+        <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort>
+
+        <ng-container matColumnDef="idColumn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nameColumn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+          <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="latitudeColumn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Latitude</th>
+          <td mat-cell *matCellDef="let element"> {{ element.latitude }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="longitudeColumn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Longitude</th>
+          <td mat-cell *matCellDef="let element"> {{ element.longitude }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="altitudeColumn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Altitude</th>
+          <td mat-cell *matCellDef="let element"> {{ element.altitude }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="launchDateColumn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Launch Date</th>
+          <td mat-cell *matCellDef="let element"> {{ element.launchDate }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
       </div>
     </div>
   </div>
