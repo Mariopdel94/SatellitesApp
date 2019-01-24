@@ -1,13 +1,7 @@
-import { Subject } from 'rxjs/Subject';
+import { Sort } from '@angular/material';
+import { SatelliteData } from './../_core/models/satellite-data/satellite-data.model';
 import { SatelliteDataService } from './../_core/api/satellite-data/satellite-data.service';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MatTableDataSource, MatSort } from '@angular/material';
-import { merge } from 'rxjs/observable/merge';
-import { of as observableOf } from 'rxjs/observable/of';
-import { catchError } from 'rxjs/operators/catchError';
-import { map } from 'rxjs/operators/map';
-import { startWith } from 'rxjs/operators/startWith';
-import { switchMap } from 'rxjs/operators/switchMap';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -15,7 +9,7 @@ import { switchMap } from 'rxjs/operators/switchMap';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   public isBusy: boolean;
   public categories = [
     {
@@ -224,52 +218,64 @@ export class HomeComponent implements OnInit, AfterViewInit {
     },
   ];
   public categoryId: number;
-  public displayedColumns: string[] = [
-    'idColumn',
-    'nameColumn',
-    'latitudeColumn',
-    'longitudeColumn',
-    'altitudeColumn',
-    'launchDateColumn'
-  ];
-  public dataSource = new MatTableDataSource();
-  @ViewChild(MatSort) sort: MatSort;
-  public categoryChange$: Subject<boolean> = new Subject();
+  public sortedData: SatelliteData[] = [];
+  public unsortedData: SatelliteData[] = [];
+  public latitude = 36.1057;
+  public longitude = 112.0948;
 
   constructor(
     private _satelliteDataService: SatelliteDataService,
   ) { }
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
+    this.getSatellites();
   }
 
-  ngAfterViewInit() {
-    this._sortListener();
+  public getSatellites() {
+    this.isBusy = true;
+    const params = { latitude: this.latitude, longitude: this.longitude, categoryId: (this.categoryId || 0) };
+    this._satelliteDataService.getSatellites(params)
+    .subscribe(response => {
+      this.isBusy = false;
+      this.sortedData = this.unsortedData = response.records;
+    }, error => {
+      this.isBusy = false;
+      console.log(error);
+    });
   }
 
-  private _sortListener() {
-    merge(this.sort.sortChange, this.categoryChange$)
-    .pipe(
-      startWith({}),
-      switchMap(() => {
-        this.isBusy = true;
-        const params = { latitude: 36.1057, longitude: 112.0948, categoryId: (this.categoryId || 0) };
-        return this._satelliteDataService.getSatellites(params);
-      }),
-      map(data => {
-        this.isBusy = false;
-        return data.records;
-      }),
-      catchError(() => {
-        this.isBusy = false;
-        return observableOf([]);
-      })
-    ).subscribe(data => this.dataSource.data = data);
+  public sortData(sort: Sort) {
+    this.isBusy = true;
+    const data = this.unsortedData.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'id': return this._compare(a.id, b.id, isAsc);
+        case 'name': return this._compare(a.name, b.name, isAsc);
+        case 'latitude': return this._compare(a.latitude, b.latitude, isAsc);
+        case 'longitude': return this._compare(a.longitude, b.longitude, isAsc);
+        case 'altitude': return this._compare(a.altitude, b.altitude, isAsc);
+        case 'launchDate': return this._compare(a.launchDate, b.launchDate, isAsc);
+        default: return 0;
+      }
+    });
+
+    setTimeout(() => {
+      this.isBusy = false;
+    });
+  }
+
+  private _compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
   public onSelectChange() {
-    this.categoryChange$.next(true);
+    this.getSatellites();
   }
 
 }

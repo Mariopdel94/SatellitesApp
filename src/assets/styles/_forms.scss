@@ -1,9 +1,9 @@
 @import "ui-elements/colors";
 
-input, textarea {
+input {
   background-color: #f3f3f3;
   border: none;
-  border-bottom: 2px solid lighten(color(gray, base), 25%);
+  border: 2px solid color(primary, base);
   border-radius: 0.2rem;
   box-shadow: none;
   color: color(primary, base);
@@ -13,7 +13,7 @@ input, textarea {
   padding-right: 1.5rem;
   padding: 0rem 1rem;
   transition: all 0.5s ease;
-  width: 100%;
+  margin-right: 1rem;
 
   &::placeholder {
     color: color(neutral, trans);
@@ -25,41 +25,7 @@ input, textarea {
     outline: 0;
   }
 
-  &:active {
-    border-bottom: 2px solid lighten(color(gray, base), 25%);
-  }
-
   &:focus {
-    background-color: #f1efff;
     border-bottom: 2px solid color(primary, base);
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-  }
-
-  &.ng-touched.ng-invalid {
-    background-color: color(warning, base) !important;
-    border-color: transparent !important;
-    color: color(light) !important;
-  }
-}
-
-textarea {
-  height: 8rem;
-  padding: 1rem;
-  resize: vertical;
-}
-
-.obligatory-field {
-  position: relative;
-
-  &::after {
-    color: color(warning, base);
-    content: '*';
-    font-size: 1.5rem;
-    position: absolute;
-    right: 0.5rem;
-    top: 0.25rem;
   }
 }

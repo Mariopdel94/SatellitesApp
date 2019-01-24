@@ -1,67 +1,75 @@
 <div class="page">
-  <div class="center-x">
+  <div class="center-x grid-x">
 
-    <div class="select-container">
-      <ng-select
-      class="satellite-app-select"
-      name="satelliteAppSelect"
-      notFoundText="There's no categories with that name"
-      placeholder="Filter by category"
-      [items]="categories"
-      [dropdownPosition]="'bottom'"
-      bindLabel="name"
-      bindValue="id"
-      (change)="onSelectChange()"
-      [(ngModel)]="categoryId"
-      [searchable]="true">
-        <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
-          <div class="center-y">
-            <span [ngOptionHighlight]="search">{{ item.name }}</span>
-          </div>
-        </ng-template>
-      </ng-select>
+    <div class="small-12 cell grid-margin-y grid-x grid-container space-between" style="padding-top: 2rem;">
+
+      <div class="center-y small-12 medium-shrink cell grid-x grid-margin-y">
+        <div class="small-12 medium-shrink cell">
+          <span>Latitude</span>
+          <br>
+          <input type="tel" [(ngModel)]="latitude">
+        </div>
+        <div class="small-12 medium-shrink cell">
+          <span>Longitude</span>
+          <br>
+          <input type="tel" [(ngModel)]="longitude">
+        </div>
+        <div class="select-container small-12 medium-shrink cell">
+          <br>
+          <ng-select
+          class="satellite-app-select"
+          name="satelliteAppSelect"
+          notFoundText="There's no categories with that name"
+          placeholder="Filter by category"
+          [items]="categories"
+          [dropdownPosition]="'bottom'"
+          bindLabel="name"
+          bindValue="id"
+          (change)="onSelectChange()"
+          [(ngModel)]="categoryId"
+          [searchable]="true">
+            <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+              <div class="center-y">
+                <span [ngOptionHighlight]="search">{{ item.name }}</span>
+              </div>
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+
+      <div class="small-12 medium-shrink cell end-y grid-margin-y">
+        <div class="cell">
+          <button class="info-button" (click)="getSatellites()" [disabled]="!longitude || !latitude">
+            Get info!
+          </button>
+        </div>
+      </div>
+
     </div>
 
-    <div class="page-content full-width grid-container relative">
+    <div class="small-12 cell page-content full-width grid-container relative">
       <app-spinner [class.hidden]="!isBusy"></app-spinner>
-      <div [class.hidden]="isBusy">
-        <table
-        mat-table
-        [dataSource]="dataSource"
-        matSort>
+      <div [class.hidden]="isBusy" class="table-container">
+        <table (matSortChange)="sortData($event)" matSort>
 
-        <ng-container matColumnDef="idColumn">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-          <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
-        </ng-container>
+        <tr class="header-row">
+          <th class="show-for-large" mat-sort-header="id">ID</th>
+          <th mat-sort-header="name">Name</th>
+          <th mat-sort-header="latitude">Latitude</th>
+          <th mat-sort-header="longitude">Longitude</th>
+          <th mat-sort-header="altitude">Altitude</th>
+          <th mat-sort-header="launchDate">Launch Date</th>
+        </tr>
 
-        <ng-container matColumnDef="nameColumn">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-          <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
-        </ng-container>
+        <tr *ngFor="let satellite of sortedData" class="content-row">
+          <td class="show-for-large">{{ satellite.id }}</td>
+          <td>{{ satellite.name }}</td>
+          <td>{{ satellite.latitude }}</td>
+          <td>{{ satellite.longitude }}</td>
+          <td>{{ satellite.altitude }}</td>
+          <td>{{ satellite.launchDate }}</td>
+        </tr>
 
-        <ng-container matColumnDef="latitudeColumn">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Latitude</th>
-          <td mat-cell *matCellDef="let element"> {{ element.latitude }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="longitudeColumn">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Longitude</th>
-          <td mat-cell *matCellDef="let element"> {{ element.longitude }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="altitudeColumn">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Altitude</th>
-          <td mat-cell *matCellDef="let element"> {{ element.altitude }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="launchDateColumn">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Launch Date</th>
-          <td mat-cell *matCellDef="let element"> {{ element.launchDate }} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </div>
     </div>

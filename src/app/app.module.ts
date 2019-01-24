@@ -9,6 +9,7 @@ import { UIModule } from './_core/modules/ui/ui.module';
 
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { WrapperFooterComponent } from './wrapper/components/wrapper-footer/wrapper-footer.component';
+import { WrapperHeaderComponent } from './wrapper/components/wrapper-header/wrapper-header.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
@@ -29,6 +30,7 @@ const routes: Routes = [
   declarations: [
     WrapperComponent,
     WrapperFooterComponent,
+    WrapperHeaderComponent,
   ],
   providers: [],
   bootstrap: [ WrapperComponent ],

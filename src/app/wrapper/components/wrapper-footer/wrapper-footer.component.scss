@@ -45,6 +45,13 @@
         color: color(accent, base);
       }
 
+      &.active {
+        color: color(accent, base);
+        &:after {
+          width: 100%;
+        }
+      }
+
       a {
         color: #6255C5;
         text-decoration: none;
