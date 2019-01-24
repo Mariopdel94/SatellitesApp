@@ -50,13 +50,19 @@
 .menu-container {
   display: flex;
   justify-content: center;
+  align-items: center;
 
   @include resolutions-above($resolution-large) {
-    justify-content: space-between;
+    justify-content: flex-end;
   }
 }
 
 #header-nav {
+  @include resolutions-above($resolution-large) {
+    display: flex;
+    align-items: center;
+  }
+
   .navigation-button {
     @include span-underline(color(accent, base), 1px);
     color: #6255C5;
