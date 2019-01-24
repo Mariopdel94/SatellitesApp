@@ -13,6 +13,10 @@ export class HomeComponent implements OnInit {
   public isBusy: boolean;
   public categories = [
     {
+      id: 0,
+      name: 'All'
+    },
+    {
       id: 18,
       name: 'Amateur radio',
     },
