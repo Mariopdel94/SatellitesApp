@@ -253,6 +253,9 @@ export class HomeComponent implements OnInit {
     const data = this.unsortedData.slice();
     if (!sort.active || sort.direction === '') {
       this.sortedData = data;
+      setTimeout(() => {
+        this.isBusy = false;
+      });
       return;
     }
 
