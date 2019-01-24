@@ -282,4 +282,8 @@ export class HomeComponent implements OnInit {
     this.getSatellites();
   }
 
+  public downloadResponse() {
+    this._satelliteDataService.downloadFile();
+  }
+
 }

@@ -3,7 +3,7 @@
 
     <div class="small-12 cell grid-margin-y grid-x grid-container space-between" style="padding-top: 2rem;">
 
-      <div class="center-y small-12 medium-shrink cell grid-x grid-margin-y">
+      <div class="center-y small-12 cell grid-x grid-margin-x grid-margin-y">
         <div class="small-12 medium-shrink cell">
           <span>Latitude</span>
           <br>
@@ -35,12 +35,18 @@
             </ng-template>
           </ng-select>
         </div>
-      </div>
-
-      <div class="small-12 medium-shrink cell end-y grid-margin-y">
-        <div class="cell">
+        <div class="small-12 medium-shrink cell">
+          <br>
           <button class="info-button" (click)="getSatellites()" [disabled]="!longitude || !latitude">
             Get info!
+          </button>
+        </div>
+      </div>
+
+      <div class="small-12 cell">
+        <div class="cell">
+          <button class="info-button" (click)="downloadResponse()">
+            Download response
           </button>
         </div>
       </div>
