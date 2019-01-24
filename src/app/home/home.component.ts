@@ -268,7 +268,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     ).subscribe(data => this.dataSource.data = data);
   }
 
-  public onSelectChange(category) {
+  public onSelectChange() {
     this.categoryChange$.next(true);
   }
 

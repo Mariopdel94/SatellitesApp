@@ -11,7 +11,7 @@
       [dropdownPosition]="'bottom'"
       bindLabel="name"
       bindValue="id"
-      (change)="onSelectChange($event)"
+      (change)="onSelectChange()"
       [(ngModel)]="categoryId"
       [searchable]="true">
         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
