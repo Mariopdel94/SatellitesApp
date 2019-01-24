@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UIModule } from './_core/modules/ui/ui.module';
@@ -32,7 +33,9 @@ const routes: Routes = [
     WrapperFooterComponent,
     WrapperHeaderComponent,
   ],
-  providers: [],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [ WrapperComponent ],
 })
 export class AppModule { }
